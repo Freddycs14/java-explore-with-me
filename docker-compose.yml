@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   stats-server:
-    build: ./stats/stats-server
+    build: ./ewm-stat-service/stats-server
     image: stats-server
     container_name: stats-server
     ports:
@@ -24,9 +24,9 @@ services:
       - POSTGRES_DB=stats-db
 
   ewm-main-service:
-    build: ./main-service
-    image: ewm-main-service-image
-    container_name: ewm-main-service
+    build: ./ewm-main-service
+    image: ewm-service:latest
+    container_name: ewm-service
     ports:
     - "8080:8080"
     depends_on:
