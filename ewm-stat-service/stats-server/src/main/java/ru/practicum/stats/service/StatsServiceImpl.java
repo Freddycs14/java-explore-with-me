@@ -11,7 +11,6 @@ import ru.practicum.stats.model.mapper.StatsMapper;
 import ru.practicum.stats.repository.StatsRepository;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,14 +25,15 @@ public class StatsServiceImpl implements StatsService {
         Stats postedHit = statsRepository.save(stats);
         return StatsMapper.toStatsDto(postedHit);
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<ViewStats> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
-        if(start.isAfter(end) || start.isEqual(end)) {
+        if (start.isAfter(end) || start.isEqual(end)) {
             throw new ValidationException("Неправильно задано время");
         }
         List<ViewStats> stats;
-        if(unique) {
+        if (unique) {
             if (uris == null || uris.isEmpty()) {
                 stats = statsRepository.getStatsUnique(start, end);
             } else {
