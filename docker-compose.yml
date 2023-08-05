@@ -25,7 +25,7 @@ services:
 
   ewm-main-service:
     build: ./ewm-main-service
-    image: ewm-service:latest
+    image: ewm-service
     container_name: ewm-service
     ports:
     - "8080:8080"
