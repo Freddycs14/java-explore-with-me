@@ -12,14 +12,14 @@ public class ErrorHandler {
     @ExceptionHandler(ValidationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidationException(final ValidationException e) {
-        log.info("Ошибка 400");
+        log.info("Получен статус 400 Bad Request {}", e.getMessage(), e);
         return new ErrorResponse("error", e.getMessage());
     }
 
     @ExceptionHandler(OtherException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleOtherException(final Throwable e) {
-        log.info("Ошибка 500");
+        log.info("Получен статус 400 Internal Server Error {}", e.getMessage(), e);
         return new ErrorResponse("error", e.getMessage());
     }
 }

@@ -1,17 +1,21 @@
 package ru.practicum.dto.stats;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatsDto {
     Long id;
     String app;
     String uri;
     String ip;
-    String timestamp;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    LocalDateTime timestamp;
 }

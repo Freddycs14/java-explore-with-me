@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.dto.stats.StatsDto;
 import ru.practicum.dto.stats.ViewStats;
-import ru.practicum.stats.exception.ValidationException;
 import ru.practicum.stats.model.Stats;
 import ru.practicum.stats.model.mapper.StatsMapper;
 import ru.practicum.stats.repository.StatsRepository;
@@ -29,9 +28,6 @@ public class StatsServiceImpl implements StatsService {
     @Override
     @Transactional(readOnly = true)
     public List<ViewStats> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
-        if (start.isAfter(end) || start.isEqual(end)) {
-            throw new ValidationException("Неправильно задано время");
-        }
         List<ViewStats> stats;
         if (unique) {
             if (uris == null || uris.isEmpty()) {
