@@ -28,7 +28,7 @@ services:
       - POSTGRES_USER=asd
       - POSTGRES_PASSWORD=123
 
-  ewm-main-service:
+  ewm-service:
     build: ./ewm-main-service
     image:
       ewm-service:latest
