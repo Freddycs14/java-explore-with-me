@@ -12,6 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RequestUpdate {
-    List<Request> requestConformed = new ArrayList<>();
-    List<Request> requestCansel = new ArrayList<>();
+    List<Request> requestConfirmed = new ArrayList<>();
+    List<Request> requestCanceled = new ArrayList<>();
 }

@@ -27,8 +27,8 @@ public class RequestMapper {
 
     public EventRequestStatusUpdateResult toEventRequestStatusUpdateResult(RequestUpdate requestUpdate) {
         return EventRequestStatusUpdateResult.builder()
-                .rejectedRequests(RequestMapper.toListParticipationRequestDto(requestUpdate.getRequestCansel()))
-                .confirmedRequests(RequestMapper.toListParticipationRequestDto(requestUpdate.getRequestConformed()))
+                .rejectedRequests(RequestMapper.toListParticipationRequestDto(requestUpdate.getRequestCanceled()))
+                .confirmedRequests(RequestMapper.toListParticipationRequestDto(requestUpdate.getRequestConfirmed()))
                 .build();
     }
 }

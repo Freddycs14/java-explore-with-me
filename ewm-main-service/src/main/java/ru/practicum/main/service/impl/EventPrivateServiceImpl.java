@@ -171,11 +171,11 @@ public class EventPrivateServiceImpl implements EventPrivateService {
                     new NotFoundException("Данный запрос не найден"));
             if (requestDto.getStatus().equals(RequestStatus.CONFIRMED)) {
                 request.setStatus(RequestStatus.CONFIRMED);
-                requestUpdate.getRequestConformed().add(request);
+                requestUpdate.getRequestConfirmed().add(request);
             }
             if (requestDto.getStatus().equals(RequestStatus.REJECTED)) {
                 request.setStatus(RequestStatus.REJECTED);
-                requestUpdate.getRequestCansel().add(request);
+                requestUpdate.getRequestCanceled().add(request);
             }
         }
         return RequestMapper.toEventRequestStatusUpdateResult(requestUpdate);
