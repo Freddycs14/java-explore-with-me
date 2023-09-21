@@ -1,9 +1,6 @@
 package ru.practicum.main.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.main.dto.CommentDto;
@@ -36,14 +33,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public CommentDto createComment(Long userId, Long eventId, NewCommentDto commentDto) {
-        if(commentDto.getText().isBlank() || commentDto.getText().isEmpty()) {
+        if (commentDto.getText().isBlank() || commentDto.getText().isEmpty()) {
             throw new ValidationException("Комментарий не может быть пустым");
         }
         User author = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Событие не найдено"));
-        if(!event.getState().equals(EventState.PUBLISHED)) {
+        if (!event.getState().equals(EventState.PUBLISHED)) {
             throw new ConflictException("Нельзя комментировать еще не опубликованное событие");
         }
         Comment comment = Comment.builder()
@@ -61,7 +58,7 @@ public class CommentServiceImpl implements CommentService {
     public CommentDto updateCommentByUser(Long userId, Long comId, NewCommentDto commentDto) {
         Comment comment = commentRepository.findById(comId)
                 .orElseThrow(() -> new NotFoundException("Комментарий не найден"));
-        if(!comment.getAuthor().getId().equals(userId)) {
+        if (!comment.getAuthor().getId().equals(userId)) {
             throw new ConflictException("Только автор может изменить комментарий");
         }
         comment.setText(commentDto.getText());
@@ -74,7 +71,7 @@ public class CommentServiceImpl implements CommentService {
     public void removeCommentByUser(Long userId, Long comId) {
         Comment comment = commentRepository.findById(comId)
                 .orElseThrow(() -> new NotFoundException("Комментарий не найден"));
-        if(!comment.getAuthor().getId().equals(userId)) {
+        if (!comment.getAuthor().getId().equals(userId)) {
             throw new ConflictException("Только автор может удалить комментарий");
         }
         commentRepository.deleteById(comId);
@@ -83,7 +80,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public void adminRemoveComment(Long comId) {
-        if(!commentRepository.existsById(comId)) {
+        if (!commentRepository.existsById(comId)) {
             throw new NotFoundException("Комментарий не найден");
         }
         commentRepository.deleteById(comId);
@@ -92,7 +89,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public List<CommentDto> search(String text) {
-        if(text.isBlank()) {
+        if (text.isBlank()) {
             return new ArrayList<>();
         }
         List<Comment> commentSearch = commentRepository.findAllByText(text);
@@ -104,7 +101,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public List<CommentDto> searchUserComment(Long userId) {
-        if(!userRepository.existsById(userId)) {
+        if (!userRepository.existsById(userId)) {
             throw new NotFoundException("Пользователь не найден");
         }
         List<Comment> list = commentRepository.findAllByAuthorId(userId);

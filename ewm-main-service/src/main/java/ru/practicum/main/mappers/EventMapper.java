@@ -105,7 +105,7 @@ public class EventMapper {
         return list.stream().map(EventMapper::toEventShort).collect(Collectors.toList());
     }
 
-    public EventCommentDto toEventCommentDto (Event event) {
+    public EventCommentDto toEventCommentDto(Event event) {
         return EventCommentDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())

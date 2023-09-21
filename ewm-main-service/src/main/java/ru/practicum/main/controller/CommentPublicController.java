@@ -15,6 +15,7 @@ import ru.practicum.main.service.CommentService;
 @Validated
 public class CommentPublicController {
     private final CommentService service;
+
     @GetMapping("/comment/{comId}")
     public CommentDto getComment(@PathVariable Long comId) {
         log.info("Получение комментария по id");
