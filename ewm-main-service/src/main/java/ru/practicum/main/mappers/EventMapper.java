@@ -104,4 +104,11 @@ public class EventMapper {
     public static List<EventShort> toListEventShort(List<Event> list) {
         return list.stream().map(EventMapper::toEventShort).collect(Collectors.toList());
     }
+
+    public EventCommentDto toEventCommentDto(Event event) {
+        return EventCommentDto.builder()
+                .id(event.getId())
+                .title(event.getTitle())
+                .build();
+    }
 }
